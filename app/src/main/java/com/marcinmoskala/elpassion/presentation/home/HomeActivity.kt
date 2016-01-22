@@ -7,7 +7,6 @@ import android.view.Gravity
 import android.widget.EditText
 import com.jakewharton.rxbinding.widget.RxTextView
 import com.marcinmoskala.elpassion.R
-import com.marcinmoskala.elpassion.showError
 import org.jetbrains.anko.*
 import org.jetbrains.anko.recyclerview.v7.recyclerView
 
@@ -41,7 +40,7 @@ class HomeActivity : Activity(), AnkoComponent<HomeActivity> {
     }
 
     private fun bindSearchToUpdateAdapter(search: EditText) {
-        presenter.onSearchTextChanged(editTextToObservable(search), adapter, {showError(it)})
+        presenter.onSearchTextChanged(editTextToObservable(search), adapter, {toast(it)})
     }
 
     fun editTextToObservable(editText: EditText) =

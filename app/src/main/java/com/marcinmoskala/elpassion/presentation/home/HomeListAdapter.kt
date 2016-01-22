@@ -1,8 +1,6 @@
 package com.marcinmoskala.elpassion.presentation.home
 
-import android.support.v7.util.SortedList
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.marcinmoskala.elpassion.R

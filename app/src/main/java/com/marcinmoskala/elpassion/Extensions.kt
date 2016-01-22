@@ -14,7 +14,3 @@ public val Context.picasso: Picasso
 
 public val gson: Gson
     get() = Gson()
-
-public fun Activity.showError(error: String) {
-    this.longToast(error)
-}

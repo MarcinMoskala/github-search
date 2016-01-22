@@ -1,11 +1,9 @@
 package com.marcinmoskala.elpassion.presentation.home
 
-import android.app.Activity
 import com.marcinmoskala.elpassion.Rest
 import com.marcinmoskala.elpassion.presentation.home.items.RecyclerViewItem
 import com.marcinmoskala.elpassion.presentation.home.items.RepoItem
 import com.marcinmoskala.elpassion.presentation.home.items.UserItem
-import com.marcinmoskala.elpassion.showError
 import rx.Observable
 import rx.android.schedulers.AndroidSchedulers.mainThread
 import rx.schedulers.Schedulers.io
@@ -22,6 +20,7 @@ class HomeController {
                     adapter.changeItemsByType(it)
                 }, {
                     showErrorFunction(it.message?:"Nieznany b³¹d")
+                    onSearchTextChanged(searchTextObservable, adapter, showErrorFunction)
                 })
     }
 
