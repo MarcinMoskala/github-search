@@ -1,15 +1,15 @@
 package com.marcinmoskala.elpassion
 
-import com.marcinmoskala.elpassion.model.Repo
 import com.marcinmoskala.elpassion.model.SearchRepoResult
 import com.marcinmoskala.elpassion.model.SearchUserResult
-import com.marcinmoskala.elpassion.model.User
 import com.squareup.okhttp.OkHttpClient
-import com.squareup.okhttp.Request
 import com.squareup.okhttp.logging.HttpLoggingInterceptor
 import com.squareup.okhttp.logging.HttpLoggingInterceptor.Level.BODY
-import retrofit.*
-import retrofit.http.*
+import retrofit.GsonConverterFactory
+import retrofit.Retrofit
+import retrofit.RxJavaCallAdapterFactory
+import retrofit.http.GET
+import retrofit.http.Query
 import rx.Observable
 
 class Rest {

@@ -1,6 +1,8 @@
 package com.marcinmoskala.elpassion.presentation.home
 
 import android.app.Activity
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.Gravity.CENTER_HORIZONTAL
 import android.view.Gravity.CENTER_VERTICAL
@@ -10,7 +12,7 @@ import com.marcinmoskala.elpassion.picasso
 import com.marcinmoskala.elpassion.presentation.home.UserActivity.Const.USER_JSON_ARG
 import org.jetbrains.anko.*
 
-class UserActivity : Activity(), AnkoComponent<HomeActivity> {
+class UserActivity : Activity() {
     var user: User? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,10 +20,10 @@ class UserActivity : Activity(), AnkoComponent<HomeActivity> {
         val extras = intent?.extras
         user = gson.fromJson(extras?.getString(USER_JSON_ARG), User::class.java)
 
-        setContentView(this)
+        setContentView(view)
     }
 
-    override fun createView(ui: AnkoContext<HomeActivity>) = with(ui) {
+    val view = UI {
         verticalLayout {
             padding = dip(12)
             gravity = CENTER_VERTICAL or CENTER_HORIZONTAL
@@ -34,7 +36,7 @@ class UserActivity : Activity(), AnkoComponent<HomeActivity> {
             }
 
             textView() {
-                text = if(user != null) user?.id.toString() else "Unknown id"
+                text = user?.id.toString() ?: "Unknown id"
                 gravity = CENTER_VERTICAL or CENTER_HORIZONTAL
             }
 
@@ -47,6 +49,12 @@ class UserActivity : Activity(), AnkoComponent<HomeActivity> {
                 text = user?.url ?: "Unknown url"
                 gravity = CENTER_VERTICAL or CENTER_HORIZONTAL
             }
+        }
+    }.view
+
+    companion object{
+        fun start(context: Context,  user: User) {
+            context.startActivity(Intent(context, UserActivity::class.java).putExtra(USER_JSON_ARG, gson.toJson(user)))
         }
     }
 

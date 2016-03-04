@@ -11,7 +11,7 @@ import com.marcinmoskala.elpassion.theSameClass
 import java.util.*
 
 class HomeListAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    var items: SortedSet<RecyclerViewItem> = sortedSetOf(comparator { r1, r2 -> compareValues(r1.id, r2.id) })
+    var items: List<RecyclerViewItem> = listOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(viewType, parent, false)
@@ -39,40 +39,8 @@ class HomeListAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         return items.elementAt(position)
     }
 
-    fun addItem(newElem: RecyclerViewItem, position: Int = items.indexOf(newElem)) {
-        items.add(newElem)
-        notifyItemInserted(position)
-    }
-
-    fun removeItem(remElem: RecyclerViewItem, position: Int = items.indexOf(remElem)) {
-        items.remove(remElem)
-        notifyItemRemoved(position)
-    }
-
-    fun changeItemsByType(newList: List<RecyclerViewItem>) {
-        removeElementsOneByOne(newList)
-        addElementsOneByOne(newList)
-    }
-
-    private fun addElementsOneByOne(newList: List<RecyclerViewItem>) {
-        for(newElem in newList) {
-            if (newElem !in items) {
-                addItem(newElem)
-            }
-        }
-    }
-
-    private fun removeElementsOneByOne(newList: List<RecyclerViewItem>) {
-        var index: Int = 0
-        var iter: MutableIterator<RecyclerViewItem> = items.iterator()
-        while (iter.hasNext()) {
-            val item: RecyclerViewItem = iter.next()
-            if (newList.isEmpty() || ((newList.first() theSameClass item) && item !in newList)) {
-                iter.remove()
-                notifyItemRemoved(index)
-            } else {
-                index++
-            }
-        }
+    fun changeItems(newItems: List<RecyclerViewItem>) {
+        items =  newItems
+        notifyDataSetChanged()
     }
 }

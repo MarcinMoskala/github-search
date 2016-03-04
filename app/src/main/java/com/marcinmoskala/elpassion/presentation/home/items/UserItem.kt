@@ -22,7 +22,7 @@ class UserItem(val user: User) : RecyclerViewItem {
             name.text = user.login
             id.text = context.getString(R.string.id_prefix, user.id)
             view.onClick {
-                context.startActivity(Intent(context, UserActivity::class.java).putExtra(USER_JSON_ARG, gson.toJson(user)))
+                UserActivity.start(context, user)
             }
         }
     }
